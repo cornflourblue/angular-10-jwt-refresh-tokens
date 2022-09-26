@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-jwt-refresh-tokens": {
+    "kanban-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-jwt-refresh-tokens",
+            "outputPath": "dist/kanban-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -65,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-jwt-refresh-tokens:build"
+            "browserTarget": "kanban-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-jwt-refresh-tokens:build:production"
+              "browserTarget": "kanban-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-jwt-refresh-tokens:build"
+            "browserTarget": "kanban-angular:build"
           }
         },
         "test": {
@@ -100,15 +100,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-jwt-refresh-tokens:serve"
+            "devServerTarget": "kanban-angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-jwt-refresh-tokens:serve:production"
+              "devServerTarget": "kanban-angular:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "angular-jwt-refresh-tokens"
+  "defaultProject": "kanban-angular"
 }
