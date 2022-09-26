@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('angular-jwt-refresh-tokens app is running!');
+    expect(page.getTitleText()).toEqual('kanban-angular app is running!');
   });
 
   afterEach(async () => {
