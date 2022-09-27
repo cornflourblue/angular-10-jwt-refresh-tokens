@@ -1,21 +1,21 @@
 ﻿import { Component } from '@angular/core';
-import { first } from 'rxjs/operators';
 
-import { User } from '@app/_models';
-import { UserService } from '@app/_services';
+import { Card } from '@app/_models';
+import { CardService } from '@app/_services';
 
 @Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
     loading = false;
-    users: User[];
+    cards: Card[];
 
-    constructor(private userService: UserService) { }
+    constructor(private cardService: CardService) { }
 
     ngOnInit() {
         this.loading = true;
-        this.userService.getAll().pipe(first()).subscribe(users => {
+
+        this.cardService.getAll().subscribe(cards => {
             this.loading = false;
-            this.users = users;
+            this.cards = cards;
         });
     }
 }

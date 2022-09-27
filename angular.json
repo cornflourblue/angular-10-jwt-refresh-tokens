@@ -59,15 +59,39 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "kanban-angular:build"
+            "browserTarget": "kanban-angular:build:development"
           },
           "configurations": {
+            "development": {
+              "browserTarget": "kanban-angular:build:development"
+            },
             "production": {
               "browserTarget": "kanban-angular:build:production"
             }
