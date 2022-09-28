@@ -1,22 +1,19 @@
 ﻿<!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+<mat-toolbar color="primary" *ngIf="user" fxLayout="row" fxLayoutAlign="space-between center">
+    <a (click)="navigateHome()">Kanban App</a>
+    <div>
+        <a (click)="logout()">Logout</a>
     </div>
-</nav>
+</mat-toolbar>
 
 <!-- main app container -->
-<div class="container">
+<div>
     <router-outlet></router-outlet>
 </div>
 
 <!-- credits -->
-<div class="text-center mt-4">
+<!-- <div>
     <p>
-        <a href="https://jasonwatmore.com/post/2020/07/25/angular-10-jwt-authentication-with-refresh-tokens" target="_top">Angular 10 - JWT Authentication with Refresh Tokens</a>
+        <a href="https://jasonfigueroa.io" target="_top">JasonFigueroa.io</a>
     </p>
-    <p>
-        <a href="https://jasonwatmore.com" target="_top">JasonWatmore.com</a>
-    </p>
-</div>
+</div> -->
