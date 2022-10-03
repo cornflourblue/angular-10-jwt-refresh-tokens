@@ -1,10 +1,8 @@
-﻿<div class="card mt-4">
-    <h4 class="card-header">You're logged in with Angular 10 + JWT & Refresh Tokens!!</h4>
-    <div class="card-body">
-        <h6>Cards from secure api end point</h6>
+﻿<div>
+    <div>
         <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-        <ul *ngIf="cards">
-            <li *ngFor="let card of cards">title: {{card.title}}, desc: {{card.description}}, status: {{card.status}}</li>
-        </ul>
+        <div *ngIf="cards">
+            <app-card *ngFor="let card of cards" [card]="card"></app-card>
+        </div>
     </div>
 </div>
