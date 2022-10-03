@@ -1,0 +1,19 @@
+<mat-card
+    id="kanban-card-{{ card.id }}"
+    class="kanban-card"
+    (mouseover)="isActive=true"
+    (mouseout)="isActive=false"
+    [class.mat-elevation-z2]="!isActive"
+    [class.mat-elevation-z8]="isActive">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-card-title>{{ card.title }}</mat-card-title>
+        <mat-icon aria-hidden="false" aria-label="Edit icon" fontIcon="edit" class="edit-icon" (click)="onEditClicked()">edit</mat-icon>
+    </div>
+    <mat-card-subtitle>{{ card.status }}</mat-card-subtitle>
+    <mat-card-content>
+        <p>{{ card.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button *ngIf="card.status.toString()=='Done'" mat-stroked-button color="warn" (click)="onDeleteClicked()">DELETE</button>
+    </mat-card-actions>
+</mat-card>

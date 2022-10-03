@@ -1,0 +1,17 @@
+.kanban-card {
+    margin-top: .5em;
+    margin-bottom: .5em;
+    max-width: 400px;
+}
+
+.kanban-card:hover {
+    cursor: grab;
+}
+
+.kanban-card:active {
+    cursor: grabbing;
+}
+
+.edit-icon:hover {
+    cursor: pointer;
+}
