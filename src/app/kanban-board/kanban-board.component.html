@@ -1,0 +1,54 @@
+<div class="container">
+    <mat-grid-list cols="3" rowHeight="60px" id="dropzone-headers">
+        <mat-grid-tile-header>
+            <mat-grid-tile>
+                <div id="todo-dropzone-header" class="dropzone-header">
+                    <h2>Todo</h2>
+                    <!-- <p id="add-card-button" data-bs-toggle="modal" data-bs-target="#add-card-modal">+</p> -->
+                    <mat-icon id="add-card-button" aria-hidden="false" aria-label="Add icon" fontIcon="add" class="add-icon" (click)="onAddClicked()">add</mat-icon>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile id="doing-column-header">
+                <div class="dropzone-header">
+                    <h2>Doing</h2>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile id="done-column-header">
+                <div class="dropzone-header">
+                    <h2>Done</h2>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-tile-header>
+    </mat-grid-list>
+    <mat-grid-list cols="3" rowHeight="fit" id="dropzones">
+        <div>
+            <mat-grid-tile id="todo-dropzone" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="dropzone">
+                    <div *ngIf="cards">
+                        <div *ngFor="let card of cards">
+                            <app-card *ngIf="card.status.toString()==='Todo'" [card]="card"></app-card>
+                        </div>
+                    </div>
+                </div>                
+            </mat-grid-tile>
+            <mat-grid-tile id="doing-dropzone" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="dropzone">
+                    <div *ngIf="cards">
+                        <div *ngFor="let card of cards">
+                            <app-card *ngIf="card.status.toString()==='Doing'" [card]="card"></app-card>
+                        </div>
+                    </div>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile id="done-dropzone" ondrop="drop(event)" ondragover="allowDrop(event)">
+                <div class="dropzone">
+                    <div *ngIf="cards">
+                        <div *ngFor="let card of cards">
+                            <app-card *ngIf="card.status.toString()==='Done'" [card]="card"></app-card>
+                        </div>
+                    </div>
+                </div>
+            </mat-grid-tile>
+        </div>
+    </mat-grid-list>
+</div>
