@@ -1,0 +1,50 @@
+mat-grid-tile {
+    background: fuchsia;
+}
+
+.container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#dropzones {
+    min-height: 85vh;
+}
+
+#dropzone-headers {
+    margin-bottom: 1px;
+}
+
+#todo-dropzone-header {
+    justify-content: space-between;
+}
+
+.dropzone-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+#add-card-button {
+    font-size: x-large;
+}
+
+#add-card-button:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.dropzone {
+    display: flex;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+}
+
+.dropzone > div {
+    width: 80%;
+}
