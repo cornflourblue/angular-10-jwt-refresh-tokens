@@ -24,6 +24,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { CardComponent } from './card/card.component';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
         MatInputModule,
         MatButtonModule,
         MatIconModule,
-        MatGridListModule
+        MatGridListModule,
+        DragDropModule
     ],
     declarations: [
         AppComponent,

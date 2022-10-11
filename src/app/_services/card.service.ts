@@ -9,9 +9,19 @@ import {Card} from '@app/_models';
 })
 export class CardService {
 
-    constructor(private http: HttpClient) { }
+    url = `${environment.apiUrl}/cards`;
+    
+    constructor(private http: HttpClient) {}
 
     getAll() {
-        return this.http.get<Card[]>(`${environment.apiUrl}/cards`, { withCredentials: true });
+        return this.http.get<Card[]>(this.url, { withCredentials: true });
+    }
+
+    updateCard(card: Card) {
+        return this.http.put<Card>(`${this.url}/${card.id}`, card, { withCredentials: true });
+    }
+
+    addCard(card: Card) {
+        return this.http.post<Card>(this.url, card, {withCredentials: true});
     }
 }

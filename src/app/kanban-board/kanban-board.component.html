@@ -23,29 +23,44 @@
     <mat-grid-list cols="3" rowHeight="fit" id="dropzones">
         <div>
             <mat-grid-tile id="todo-dropzone" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="dropzone">
-                    <div *ngIf="cards">
-                        <div *ngFor="let card of cards">
-                            <app-card *ngIf="card.status.toString()==='Todo'" [card]="card"></app-card>
-                        </div>
+                <div
+                    id="todoDropList"
+                    cdkDropList
+                    #todoList="cdkDropList"
+                    [cdkDropListData]="todo"
+                    [cdkDropListConnectedTo]="[doingList, doneList]"
+                    class="dropzone"
+                    (cdkDropListDropped)="drop($event)">
+                    <div *ngFor="let card of todo" cdkDrag>
+                        <app-card [card]="card"></app-card>
                     </div>
                 </div>                
             </mat-grid-tile>
             <mat-grid-tile id="doing-dropzone" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="dropzone">
-                    <div *ngIf="cards">
-                        <div *ngFor="let card of cards">
-                            <app-card *ngIf="card.status.toString()==='Doing'" [card]="card"></app-card>
-                        </div>
+                <div
+                    id="doingDropList"
+                    cdkDropList
+                    #doingList="cdkDropList"
+                    [cdkDropListData]="doing"
+                    [cdkDropListConnectedTo]="[todoList, doneList]"
+                    class="dropzone"
+                    (cdkDropListDropped)="drop($event)">
+                    <div *ngFor="let card of doing" cdkDrag>
+                        <app-card [card]="card"></app-card>
                     </div>
                 </div>
             </mat-grid-tile>
             <mat-grid-tile id="done-dropzone" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <div class="dropzone">
-                    <div *ngIf="cards">
-                        <div *ngFor="let card of cards">
-                            <app-card *ngIf="card.status.toString()==='Done'" [card]="card"></app-card>
-                        </div>
+                <div
+                    id="doneDropList"
+                    cdkDropList
+                    #doneList="cdkDropList"
+                    [cdkDropListData]="done"
+                    [cdkDropListConnectedTo]="[todoList, doingList]"
+                    class="dropzone"
+                    (cdkDropListDropped)="drop($event)">
+                    <div *ngFor="let card of done" cdkDrag>
+                        <app-card [card]="card"></app-card>
                     </div>
                 </div>
             </mat-grid-tile>
