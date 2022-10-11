@@ -18,4 +18,17 @@ export class HomeComponent {
             this.cards = cards;
         });
     }
+
+    onCardMoved(card: Card) {
+        this.cardService.updateCard(card).subscribe();
+    }
+
+    onCardAdded(card: Card) {
+        this.cardService.addCard(card).subscribe(card => {
+            this.cardService.getAll().subscribe(cards => {
+                this.loading = false;
+                this.cards = cards;
+            });
+        });
+    }
 }

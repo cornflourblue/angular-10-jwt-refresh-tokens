@@ -1,5 +1,5 @@
 export enum CardStatus {
-    Todo,
-    Doing,
-    Done
+    Todo = 'Todo',
+    Doing = 'Doing',
+    Done = 'Done'
 }

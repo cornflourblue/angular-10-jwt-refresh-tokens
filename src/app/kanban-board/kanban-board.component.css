@@ -38,13 +38,11 @@ mat-grid-tile {
 }
 
 .dropzone {
-    display: flex;
-    align-items: flex-start;
     height: 100%;
     width: 100%;
-    justify-content: center;
 }
 
 .dropzone > div {
     width: 80%;
+    margin: auto;
 }
