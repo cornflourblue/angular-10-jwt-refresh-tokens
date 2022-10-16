@@ -1,7 +1,8 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { CardStatus } from '@app/_enums/card-status';
 import { Card } from '@app/_models';
+import { CardService } from '@app/_services';
 
 @Component({
     selector: 'app-kanban-board',
@@ -9,31 +10,21 @@ import { Card } from '@app/_models';
     styleUrls: ['./kanban-board.component.css']
 })
 export class KanbanBoardComponent implements OnInit {
-    @Input() cards: Card[];
-
-    @Output() cardMoved = new EventEmitter<Card>();
-    @Output() cardAdded = new EventEmitter<Card>();
+    loading = false;
 
     todo: Card[] = [];
     doing: Card[] = [];
     done: Card[] = [];
 
-    constructor() { }
+    constructor(private cardService: CardService) { }
 
     ngOnInit(): void {
-        if (Array.isArray(this.cards)) {
-            this.cards.forEach(card => {
-                if (card.status === CardStatus.Todo) {
-                    this.todo.push(card);
-                }
-                else if (card.status === CardStatus.Doing) {
-                    this.doing.push(card);
-                }
-                else if (card.status === CardStatus.Done) {
-                    this.done.push(card);
-                }
-            });
-        }
+        this.loading = true;
+        
+        this.cardService.getAll().subscribe(cards => {
+            this.loading = false;
+            this.categorizeCards(cards);
+        });
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -77,7 +68,9 @@ export class KanbanBoardComponent implements OnInit {
         newCard.title = 'Will this work';
         newCard.description = 'Let\'s Go!';
         
-        this.cardAdded.emit(newCard);
+        this.cardService.addCard(newCard).subscribe(card => {
+            this.categorizeCards([card]);
+        });
     }
 
     drop(event: CdkDragDrop<Card[]>) {
@@ -88,9 +81,21 @@ export class KanbanBoardComponent implements OnInit {
             const movedCardElementId = event.item.element.nativeElement.children[0].children[0].id;
             let movedCardId = movedCardElementId.replace('kanban-card-', '');
 
-            let selectedCard = this.cards.filter(c => {
+            let selectedCard = this.todo.filter(c => {
                 return c.id === parseInt(movedCardId)
             })[0];
+
+            if (!selectedCard) {
+                selectedCard = this.doing.filter(c => {
+                    return c.id === parseInt(movedCardId)
+                })[0];
+            }
+
+            if (!selectedCard) {
+                selectedCard = this.done.filter(c => {
+                    return c.id === parseInt(movedCardId)
+                })[0];
+            }
 
             // Change card status
             selectedCard.status = this.deriveStatus(event.container.id);
@@ -101,9 +106,22 @@ export class KanbanBoardComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex,
             );
-
-            this.cardMoved.emit(selectedCard);
+            this.cardService.updateCard(selectedCard).subscribe();
         }
+    }
+
+    private categorizeCards(cards: Card[]) {
+        cards.forEach(card => {
+            if (card.status === CardStatus.Todo) {
+                this.todo.push(card);
+            }
+            else if (card.status === CardStatus.Doing) {
+                this.doing.push(card);
+            }
+            else if (card.status === CardStatus.Done) {
+                this.done.push(card);
+            }
+        });
     }
     
     private deriveStatus(id: string): string {

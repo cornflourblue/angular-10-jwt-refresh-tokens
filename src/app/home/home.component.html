@@ -1,11 +1,5 @@
 ﻿<div>
     <div>
-        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-        <app-kanban-board
-            *ngIf="cards"
-            [cards]="cards"
-            (cardMoved)="onCardMoved($event)"
-            (cardAdded)="onCardAdded($event)">
-        </app-kanban-board>
+        <app-kanban-board></app-kanban-board>
     </div>
 </div>
